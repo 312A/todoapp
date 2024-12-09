@@ -15,8 +15,6 @@
             z-index: 2;
         }
 
-
-
         .form-signin input[type="email"] {
             margin-bottom: -1px;
             border-bottom-right-radius: 0;
@@ -28,11 +26,13 @@
             border-top-left-radius: 0;
             border-top-right-radius: 0;
         }
-        .form-signin button{
+
+        .form-signin button {
             margin-top: 15px;
         }
-        .form-sign .error-message{
-            color:red;
+
+        .form-sign .error-message {
+            color: red;
             font-size: 0.9rem;
             margin-top: 5px;
         }
@@ -78,11 +78,9 @@
 
             {{-- reCAPTCHA --}}
             @if (config('services.recaptcha.site_key'))
-                <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
+                <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key')}}"></div>
                 @error('g-recaptcha-response')
                     <span class="text-danger mb-20">{{ $message }}</span>
-                    {{-- {!! RECAPATCHE::renderJs() !!}
-                    {!! RECAPTCHE::display() !!} --}}
                 @enderror
             @endif
 
@@ -109,7 +107,3 @@
         <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     </main>
 @endsection
-
-
-
-

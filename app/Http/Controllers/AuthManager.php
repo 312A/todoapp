@@ -59,11 +59,11 @@ class AuthManager extends Controller
             'fullname'=>'required',
             'email'=> 'required|email',
             'password' => 'required',
-            // 'g-recaptcha-response' => 'required|recaptcha'
-            'g-recaptcha-response' => 'required',
+            'g-recaptcha-response' => 'required|recaptcha'
+            // 'g-recaptcha-response' => 'required',
         ]);
         $response = Http::post('https://www.google.com/recaptcha/api/siteverify', [
-            'secret' => env('RECAPTCHA_SECRET'),
+            'secret'=>config('services.recaptcha.secret'),
             'response' => $request->input('g-recaptcha-response'),
             'remoteip' => $request->ip(),
         ]);
@@ -82,4 +82,46 @@ class AuthManager extends Controller
         return redirect(route("register"))
             ->with("error","Registration Failed");
     }
+
+    // public function registerPost(Request $request){
+    //     $validator = Validator::make($request->all(), [
+    //         'fullname' => 'required',
+    //         'email' => 'required|email',
+    //         'password' => 'required|min:6|confirmed',
+    //         'g-recaptcha-response' => 'required|recaptcha',
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return redirect()->back()
+    //             ->withErrors($validator)
+    //             ->withInput();
+    //     }
+
+    //     $response = Http::post('https://www.google.com/recaptcha/api/siteverify', [
+    //         'secret' => env('RECAPTCHA_SECRET'),
+    //         'response' => $request->input('g-recaptcha-response'),
+    //         'remoteip' => $request->ip(),
+    //     ]);
+
+    //     if (!$response->json()['success']) {
+    //         return redirect()->back()
+    //             ->withErrors(['g-recaptcha-response' => 'reCAPTCHA verification failed.'])
+    //             ->withInput();
+    //     }
+
+    //     $user = new User();
+    //     $user->name = $request->fullname;
+    //     $user->email = $request->email;
+    //     $user->password = bcrypt($request->password);
+
+    //     if ($user->save()) {
+    //         return redirect(route("login"))
+    //             ->with("success", "Registration successful");
+    //     } else {
+    //         return redirect(route("register"))
+    //             ->with("error", "Registration failed");
+    //     }
+    // }
+
+
 }

@@ -1,4 +1,5 @@
 @extends('layouts.default')
+
 @section('style')
     <style>
         html, body {
